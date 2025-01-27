@@ -30,9 +30,24 @@ var enemies_position = Vector2.ZERO
 var velocity = Vector2.ZERO
 var is_attacking : bool
 
-func get_random_enemy():
+func get_closest_enemy():
 	if enemies_close.size() > 0:
-		return enemies_close.pick_random().global_position
+		var closest_enemy = null
+		var closest_distance = INF  # Start with a very large value for comparison
+
+		for enemy in enemies_close:
+			if enemy:  # Ensure the enemy is valid (not null)
+				var distance = global_position.distance_to(enemy.global_position)
+				if distance < closest_distance:
+					closest_distance = distance
+					closest_enemy = enemy
+
+		return closest_enemy.global_position  # Return the closest enemy node
+	return null  # Return null if there are no enemies
+
+#func get_random_enemy(): #obsoleto
+#	if enemies_close.size() > 0:
+#		return enemies_close.pick_random().global_position
 
 func _ready():
 	define_body_variables()
@@ -107,8 +122,8 @@ func define_body_variables():
 			hp_modifier = i.hp_modifier
 			break
 
-func apply_upgrade():
-	pass
+#func apply_upgrade():
+#	pass
 
 func _process(_delta):
 	pass
@@ -127,7 +142,7 @@ func spawn_attack():
 	else:
 		new_attack.skill_damage = skill_dmg
 #	new_attack.skill_knockback = skill_knockback
-	var random_enemy = get_random_enemy()
+	var random_enemy = get_closest_enemy()#get_random_enemy()
 	new_attack.target = random_enemy
 	new_attack.direction = self.global_position.direction_to(new_attack.target).normalized()#testando, essa porra esta causando crash de alguma forma com o emerald staff, refazer essa bosta
 	is_attacking = true

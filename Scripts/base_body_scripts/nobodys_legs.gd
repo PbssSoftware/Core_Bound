@@ -1,0 +1,2 @@
+extends base_legs
+class_name nobodys_legs

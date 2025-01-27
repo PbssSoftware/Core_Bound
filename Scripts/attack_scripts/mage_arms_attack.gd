@@ -1,5 +1,5 @@
 extends base_arm_attack
-class_name mage_arms_attack
+class_name emerald_staff_attack
 
 
 func _physics_process(_delta):

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cybkjr6oilrng"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/nobodys_chest.gd" id="1_bhmw3"]
+[ext_resource type="Texture2D" uid="uid://dot2uab4lo7wi" path="res://Sprites/Body_parts_anims/Chest/nobodys_chest.png" id="2_copr0"]
+
+[node name="nobodys_chest" type="Node2D"]
+script = ExtResource("1_bhmw3")
+
+[node name="Chest_texture" type="Sprite2D" parent="."]
+z_index = -3
+scale = Vector2(3, 3)
+texture = ExtResource("2_copr0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Chest_texture"]

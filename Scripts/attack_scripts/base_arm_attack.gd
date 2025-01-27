@@ -2,7 +2,7 @@ extends Node2D
 class_name base_arm_attack
 
 
-var angle = Vector2.ZERO
+var angle : Vector2 = Vector2.ZERO
 var target #definido quando entra na range de colisao de outro script
 var direction : Vector2 = Vector2.RIGHT
 
@@ -33,7 +33,6 @@ func mage_projectile(_delta):
 	if target != null:
 		angle = global_position.direction_to(target)
 		self.look_at(target)
-#		rotation = angle.angle() + deg_to_rad(50)
 		position += angle * skill_speed * _delta
 
 func regular_arms(_delta):

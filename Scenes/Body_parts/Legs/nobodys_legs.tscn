@@ -1,0 +1,217 @@
+[gd_scene load_steps=16 format=3 uid="uid://decw71g847wc4"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/nobodys_legs.gd" id="1_80oiq"]
+[ext_resource type="Script" path="res://Resources/Scripts/Body_part_upgrade.gd" id="2_wirqj"]
+[ext_resource type="Texture2D" uid="uid://c2s3uvijnk1ky" path="res://Sprites/Body_parts_anims/Legs/nobodys_legs_idle.png" id="3_00jik"]
+[ext_resource type="Texture2D" uid="uid://dbbrl26p6e6l0" path="res://Sprites/Body_parts_anims/Legs/nobodys_legs_run.png" id="4_dwtu6"]
+
+[sub_resource type="Resource" id="Resource_6sx5q"]
+script = ExtResource("2_wirqj")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 0.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 1
+hp_modifier = 5
+defense_modifier = 1
+skill_crit_chance = 0.0
+speed_modifier = 50
+
+[sub_resource type="Resource" id="Resource_foxad"]
+script = ExtResource("2_wirqj")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 0.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 0
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Resource" id="Resource_uejha"]
+script = ExtResource("2_wirqj")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 0.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 0
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Resource" id="Resource_xunfs"]
+script = ExtResource("2_wirqj")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 0.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 0
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Resource" id="Resource_cmfj2"]
+script = ExtResource("2_wirqj")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 0.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 0
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Resource" id="Resource_08660"]
+script = ExtResource("2_wirqj")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 0.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 0
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Resource" id="Resource_11juv"]
+script = ExtResource("2_wirqj")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 0.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 0
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Animation" id="Animation_obffo"]
+resource_name = "Idle"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_00jik")]
+}
+
+[sub_resource type="Animation" id="Animation_e3uf2"]
+resource_name = "run"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_dwtu6")]
+}
+
+[sub_resource type="Animation" id="Animation_ahu5i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_00jik")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fgndp"]
+_data = {
+"Idle": SubResource("Animation_obffo"),
+"RESET": SubResource("Animation_ahu5i"),
+"run": SubResource("Animation_e3uf2")
+}
+
+[node name="nobodys_legs" type="Node2D"]
+script = ExtResource("1_80oiq")
+level_upgrader = Array[ExtResource("2_wirqj")]([SubResource("Resource_6sx5q"), SubResource("Resource_foxad"), SubResource("Resource_uejha"), SubResource("Resource_xunfs"), SubResource("Resource_cmfj2"), SubResource("Resource_08660"), SubResource("Resource_11juv")])
+part_name = "Nobody's Legs"
+
+[node name="legs_texture" type="Sprite2D" parent="."]
+modulate = Color(0.8, 0.8, 0.8, 1)
+z_index = -2
+scale = Vector2(3, 3)
+texture = ExtResource("3_00jik")
+hframes = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="legs_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_fgndp")
+}

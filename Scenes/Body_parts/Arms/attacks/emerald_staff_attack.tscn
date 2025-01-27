@@ -129,7 +129,7 @@ _data = {
 "vanish": SubResource("Animation_wlvtt")
 }
 
-[node name="mage_arms_attack" type="Node2D"]
+[node name="emerald_staff_attack" type="Node2D"]
 top_level = true
 script = ExtResource("1_o6bdp")
 

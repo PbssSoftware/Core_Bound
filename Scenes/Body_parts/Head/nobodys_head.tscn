@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfyvomujvlaux"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/nobodys_head.gd" id="1_vfjwo"]
+[ext_resource type="Texture2D" uid="uid://yfu16ahk7p62" path="res://Sprites/Body_parts_anims/Head/nobodys_head.png" id="2_qds3x"]
+
+[node name="nobodys_head" type="Node2D"]
+script = ExtResource("1_vfjwo")
+
+[node name="head_texture" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_qds3x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="head_texture"]
+root_node = NodePath("../..")
