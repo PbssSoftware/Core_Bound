@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba2ahjewnox0t"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_scripts/enemy_2.gd" id="1_ym106"]
+[ext_resource type="Texture2D" uid="uid://b6wnyaj0woin" path="res://Sprites/Enemies/toxik_suraimo.png" id="2_kw2jl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mdy3h"]
+
+[node name="Enemy2" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 3
+slide_on_ceiling = false
+script = ExtResource("1_ym106")
+enemy_hp = 10
+move_speed = 150.0
+
+[node name="Texture" type="Sprite2D" parent="."]
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_kw2jl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(3.83043, 3.835)
+shape = SubResource("RectangleShape2D_mdy3h")
+
+[node name="hurtbox" type="Area2D" parent="."]

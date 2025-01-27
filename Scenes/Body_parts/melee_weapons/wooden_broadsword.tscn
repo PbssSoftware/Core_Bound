@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvxylhrh3mx0n"]
+
+[ext_resource type="Script" path="res://Scripts/weapons_script/wooden_broadsword.gd" id="1_8wglh"]
+[ext_resource type="Texture2D" uid="uid://dh7mfjh846nvo" path="res://Sprites/Body_parts_anims/weapons/melee_weapons/wooden_sword.png" id="2_cok0y"]
+[ext_resource type="Texture2D" uid="uid://57hukcpmwi1s" path="res://Sprites/Body_parts_anims/hands/l_hand.png" id="3_im7pj"]
+
+[node name="wooden_broadsword" type="Node2D"]
+script = ExtResource("1_8wglh")
+
+[node name="weapon_sprite" type="Sprite2D" parent="."]
+z_index = -2
+scale = Vector2(3, 3)
+texture = ExtResource("2_cok0y")
+offset = Vector2(0, -16)
+
+[node name="hand_sprite" type="Sprite2D" parent="weapon_sprite"]
+position = Vector2(-1, 0)
+texture = ExtResource("3_im7pj")
+
+[node name="skill_spwn_loc" type="Marker2D" parent="."]
+unique_name_in_owner = true

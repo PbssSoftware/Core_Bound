@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://wcv2ug4rrxyc"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/ranger_head.gd" id="1_431im"]
+[ext_resource type="Texture2D" uid="uid://baocyeueh7q6m" path="res://Sprites/Body_parts_anims/Head/ranger_head.png" id="2_10fw3"]
+
+[sub_resource type="Animation" id="Animation_vjlhq"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_glx57"]
+resource_name = "head"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 6), Vector2(0, 6), Vector2(0, 6), Vector2(0, 3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xbfub"]
+resource_name = "head_run"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0pufe"]
+_data = {
+"RESET": SubResource("Animation_vjlhq"),
+"head": SubResource("Animation_glx57"),
+"head_run": SubResource("Animation_xbfub")
+}
+
+[node name="ranger_head" type="Node2D"]
+script = ExtResource("1_431im")
+
+[node name="head_texture" type="Sprite2D" parent="."]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_10fw3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="head_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_0pufe")
+}

@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxxaqguko4khp"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/pumpkin_arms.gd" id="1_0f604"]
+[ext_resource type="Texture2D" uid="uid://cs5l4bdm0oojd" path="res://Sprites/Body_parts_anims/Arms/right_pumpkin_arm.png" id="2_vuoqf"]
+[ext_resource type="Texture2D" uid="uid://6avpq0l7iv2d" path="res://Sprites/Body_parts_anims/Arms/left_pumpkin_arm.png" id="3_crqld"]
+
+[sub_resource type="Animation" id="Animation_tymju"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_uanb1"]
+resource_name = "arms"
+length = 3.0
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 6), Vector2(0, 6), Vector2(0, 6), Vector2(0, 3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_vuoqf")]
+}
+
+[sub_resource type="Animation" id="Animation_2p7d6"]
+resource_name = "arms_run"
+length = 2.3
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_vuoqf")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tixvs"]
+_data = {
+"RESET": SubResource("Animation_tymju"),
+"arms": SubResource("Animation_uanb1"),
+"arms_run": SubResource("Animation_2p7d6")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldsus"]
+radius = 900.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70vxb"]
+
+[node name="pumpkin_arms" type="Node2D"]
+script = ExtResource("1_0f604")
+
+[node name="Arms_texture" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(0, 3)
+scale = Vector2(3, 3)
+texture = ExtResource("2_vuoqf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Arms_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_tixvs")
+}
+
+[node name="Arm2" type="Sprite2D" parent="Arms_texture"]
+z_index = -2
+texture = ExtResource("3_crqld")
+
+[node name="Detection_area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_area"]
+shape = SubResource("CircleShape2D_ldsus")
+
+[node name="attack_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+shape = SubResource("CircleShape2D_70vxb")
+
+[node name="atk_cooldown_timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection_area" to="." method="_on_detection_area_body_exited" flags=18]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered" flags=18]
+[connection signal="timeout" from="atk_cooldown_timer" to="." method="_on_atk_cooldown_timer_timeout" flags=18]

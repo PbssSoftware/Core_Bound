@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckd2m6crv6e1d"]
+
+[ext_resource type="Texture2D" uid="uid://bgyw7c0o3gkpl" path="res://Sprites/Body_parts_anims/Chest/regular_chest.png" id="1_j2y0d"]
+[ext_resource type="Script" path="res://Scripts/upgrade_options.gd" id="1_sibsm"]
+
+[node name="UpgradeOptions" type="ColorRect"]
+process_mode = 2
+custom_minimum_size = Vector2(300, 300)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.345098, 0.345098, 0.372549, 1)
+script = ExtResource("1_sibsm")
+
+[node name="ItemPlace" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 110.0
+offset_bottom = 110.0
+color = Color(0.592157, 0.592157, 0.592157, 1)
+
+[node name="ItemTexture" type="TextureRect" parent="ItemPlace"]
+layout_mode = 0
+offset_left = -44.0
+offset_top = -45.0
+offset_right = 4.0
+offset_bottom = 3.0
+scale = Vector2(4, 4)
+texture = ExtResource("1_j2y0d")
+
+[node name="ItemName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 10.0
+offset_right = 227.0
+offset_bottom = 36.0
+text = "Name :
+"
+vertical_alignment = 1
+
+[node name="ItemDescription" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 170.0
+offset_right = 278.0
+offset_bottom = 291.0
+text = "Description : "
+autowrap_mode = 3
+
+[node name="ItemLevel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 117.0
+offset_right = 55.0
+offset_bottom = 140.0
+text = "Level :  "
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

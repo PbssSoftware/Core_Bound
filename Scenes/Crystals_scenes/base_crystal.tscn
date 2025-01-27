@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://sw7myn8sd2pe"]
+
+[ext_resource type="Script" path="res://Scripts/collectables/base_crystal.gd" id="1_k3bo6"]
+[ext_resource type="Texture2D" uid="uid://ch3o73xiynmsf" path="res://Sprites/crystals/common_crystal(1).png" id="2_a2h2l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_citq8"]
+radius = 358.013
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7lj1o"]
+radius = 30.0
+
+[sub_resource type="Animation" id="Animation_8exvg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("crystal_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vwe7n"]
+resource_name = "breaking"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("crystal_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-2, 0), Vector2(2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0d2c"]
+_data = {
+"RESET": SubResource("Animation_8exvg"),
+"breaking": SubResource("Animation_vwe7n")
+}
+
+[node name="base_crystal" type="StaticBody2D"]
+collision_layer = 64
+script = ExtResource("1_k3bo6")
+
+[node name="crystal_sprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2, 0)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_a2h2l")
+offset = Vector2(0, -23)
+
+[node name="drill_detect" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="drill_detect"]
+shape = SubResource("CircleShape2D_citq8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -23)
+shape = SubResource("CircleShape2D_7lj1o")
+
+[node name="crystal_anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q0d2c")
+}
+
+[connection signal="body_entered" from="drill_detect" to="." method="_on_drill_detect_body_entered"]

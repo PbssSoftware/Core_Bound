@@ -1,0 +1,162 @@
+[gd_scene load_steps=11 format=3 uid="uid://0mppnwm0xduq"]
+
+[ext_resource type="Script" path="res://Scripts/attack_scripts/mage_arms_attack.gd" id="1_o6bdp"]
+[ext_resource type="Texture2D" uid="uid://lyqsgibqxqbo" path="res://Sprites/Body_parts_anims/Arms/arms_attacks/mage_arms_projectile.png" id="1_p4awo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0mlse"]
+light_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_il5kv"]
+radius = 8.0
+
+[sub_resource type="Gradient" id="Gradient_sn0jq"]
+offsets = PackedFloat32Array(0, 0.571429, 1)
+colors = PackedColorArray(0, 1, 0, 1, 0.12782, 1, 0.12782, 0.87218, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qxuju"]
+gradient = SubResource("Gradient_sn0jq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_becpp"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 7, 1)
+particle_flag_disable_z = true
+gravity = Vector3(-23.765, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_max = 19.15
+radial_accel_min = -23.4
+radial_accel_max = 24.4
+scale_min = 3.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_qxuju")
+
+[sub_resource type="Animation" id="Animation_nud2u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("attack_texture:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("attack_area/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_wlvtt"]
+resource_name = "vanish"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("attack_texture:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("attack_area/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n70ab"]
+_data = {
+"RESET": SubResource("Animation_nud2u"),
+"vanish": SubResource("Animation_wlvtt")
+}
+
+[node name="mage_arms_attack" type="Node2D"]
+top_level = true
+script = ExtResource("1_o6bdp")
+
+[node name="attack_texture" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_0mlse")
+scale = Vector2(2, 2)
+texture = ExtResource("1_p4awo")
+
+[node name="attack_area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+shape = SubResource("CircleShape2D_il5kv")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-9, 0)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_becpp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n70ab")
+}
+
+[node name="queue_free_timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="queue_free_timer" to="." method="_on_queue_free_timer_timeout"]

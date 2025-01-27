@@ -1,0 +1,174 @@
+[gd_scene load_steps=21 format=3 uid="uid://cui3irwm5j2gy"]
+
+[ext_resource type="PackedScene" uid="uid://cy6lnqed6rmbd" path="res://Scenes/Terrain_scenes/level_1.tscn" id="1_455uf"]
+[ext_resource type="Script" path="res://Scripts/world_forest_node.gd" id="1_eth8v"]
+[ext_resource type="PackedScene" uid="uid://cxjogtxuxqbcb" path="res://Scenes/player.tscn" id="2_voju8"]
+[ext_resource type="PackedScene" uid="uid://tbg4rgcvrwe2" path="res://Scenes/enemy_spawner.tscn" id="3_iwat4"]
+[ext_resource type="Script" path="res://Scripts/enemy_scripts/Wave_manager.gd" id="4_nlu7y"]
+[ext_resource type="PackedScene" uid="uid://dxigvxoeqosh3" path="res://Scenes/Collectables/dropped_item.tscn" id="4_u1ep2"]
+[ext_resource type="PackedScene" uid="uid://c3wi8ebtk6yxx" path="res://Scenes/Enemies/enemy_1.tscn" id="5_c7wsk"]
+[ext_resource type="Script" path="res://Resources/Scripts/spawner_resource.gd" id="5_g7stk"]
+[ext_resource type="PackedScene" uid="uid://bxs5s8s16klia" path="res://Scenes/blacksmith.tscn" id="6_jvmte"]
+[ext_resource type="PackedScene" uid="uid://bjokeq6xe1ljo" path="res://Scenes/Enemies/boss_gate.tscn" id="7_p73sb"]
+[ext_resource type="Shader" path="res://Shaders/fog.gdshader" id="8_ngspp"]
+[ext_resource type="PackedScene" uid="uid://clkyldtnwxpl4" path="res://Scenes/Structures/Rand_spawners.tscn" id="12_ppvjt"]
+[ext_resource type="Script" path="res://Scripts/Structures/Structure_spawner_manager.gd" id="12_uf1bv"]
+
+[sub_resource type="Gradient" id="Gradient_781yd"]
+offsets = PackedFloat32Array(0, 0.385621, 0.718954, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.883566, 0, 0, 0, 0.647059, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7ga2y"]
+gradient = SubResource("Gradient_781yd")
+width = 300
+height = 300
+
+[sub_resource type="Resource" id="Resource_35mol"]
+script = ExtResource("5_g7stk")
+timer_start = 0
+timer_end = 20
+enemy = ExtResource("5_c7wsk")
+enemy_num = 2
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_4mlsx"]
+script = ExtResource("5_g7stk")
+timer_start = 0
+timer_end = 40
+enemy = ExtResource("5_c7wsk")
+enemy_num = 1
+enemy_spawn_delay = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jyj4d"]
+frequency = 0.0035
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3ncrk"]
+width = 1600
+height = 900
+seamless = true
+seamless_blend_skirt = 0.75
+noise = SubResource("FastNoiseLite_jyj4d")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64qt8"]
+shader = ExtResource("8_ngspp")
+shader_parameter/density = 0.071
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_3ncrk")
+
+[node name="World_forest" type="Node2D" groups=["world"]]
+y_sort_enabled = true
+script = ExtResource("1_eth8v")
+
+[node name="Map_shade_sprite" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(-599, 561)
+scale = Vector2(6.48583, 10.2533)
+texture = SubResource("GradientTexture2D_7ga2y")
+
+[node name="Map_shade_sprite3" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(515, -947)
+rotation = 1.5708
+scale = Vector2(6.48583, 10.2533)
+texture = SubResource("GradientTexture2D_7ga2y")
+
+[node name="Map_shade_sprite2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(299, 2433)
+rotation = -1.5708
+scale = Vector2(6.48583, 10.2533)
+texture = SubResource("GradientTexture2D_7ga2y")
+
+[node name="Forest_map" parent="." instance=ExtResource("1_455uf")]
+
+[node name="Player" parent="." instance=ExtResource("2_voju8")]
+position = Vector2(734, 874)
+
+[node name="Wave_manager" type="Node2D" parent="."]
+script = ExtResource("4_nlu7y")
+
+[node name="Enemy_spawner" parent="Wave_manager" instance=ExtResource("3_iwat4")]
+process_mode = 4
+wave_number = 1
+enemy_array = Array[ExtResource("5_g7stk")]([SubResource("Resource_35mol")])
+
+[node name="Enemy_spawner2" parent="Wave_manager" instance=ExtResource("3_iwat4")]
+process_mode = 4
+wave_number = 2
+enemy_array = Array[ExtResource("5_g7stk")]([SubResource("Resource_4mlsx")])
+
+[node name="Enemies" type="Node2D" parent="Wave_manager"]
+
+[node name="DroppedItem1" parent="." instance=ExtResource("4_u1ep2")]
+z_index = 2
+position = Vector2(992, 884)
+part_level = 1
+
+[node name="DroppedItem2" parent="." instance=ExtResource("4_u1ep2")]
+z_index = 2
+position = Vector2(930, 662)
+part_level = 1
+
+[node name="DroppedItem3" parent="." instance=ExtResource("4_u1ep2")]
+z_index = 2
+position = Vector2(736, 652)
+part_level = 1
+
+[node name="DroppedItem4" parent="." instance=ExtResource("4_u1ep2")]
+z_index = 2
+position = Vector2(544, 690)
+part_level = 1
+
+[node name="DroppedItem6" parent="." instance=ExtResource("4_u1ep2")]
+z_index = 2
+position = Vector2(481, 855)
+part_level = 1
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.180392, 0.345098, 0.615686, 1)
+
+[node name="DroppedItem" parent="." instance=ExtResource("4_u1ep2")]
+position = Vector2(1126, 1213)
+ID = "7"
+part_level = 1
+
+[node name="DroppedItem5" parent="." instance=ExtResource("4_u1ep2")]
+position = Vector2(1300, 1217)
+ID = "15"
+part_level = 1
+
+[node name="DroppedItem7" parent="." instance=ExtResource("4_u1ep2")]
+position = Vector2(1212, 1215)
+ID = "11"
+part_level = 1
+
+[node name="blacksmith" parent="." instance=ExtResource("6_jvmte")]
+position = Vector2(2915, 1649)
+
+[node name="boss_gate" parent="." instance=ExtResource("7_p73sb")]
+position = Vector2(3616, 1206)
+
+[node name="Fog" type="ParallaxBackground" parent="."]
+layer = 1
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Fog"]
+motion_mirroring = Vector2(1600, 900)
+
+[node name="ColorRect" type="ColorRect" parent="Fog/ParallaxLayer"]
+material = SubResource("ShaderMaterial_64qt8")
+offset_right = 1600.0
+offset_bottom = 900.0
+mouse_filter = 2
+
+[node name="Structure_spawner_manager" type="Node2D" parent="."]
+script = ExtResource("12_uf1bv")
+
+[node name="Rand_spawners" parent="Structure_spawner_manager" instance=ExtResource("12_ppvjt")]
+position = Vector2(3757, -1069)
+
+[node name="Rand_spawners2" parent="Structure_spawner_manager" instance=ExtResource("12_ppvjt")]
+position = Vector2(7277, 1965)
+
+[node name="Rand_spawners3" parent="Structure_spawner_manager" instance=ExtResource("12_ppvjt")]
+position = Vector2(4271, 3926)

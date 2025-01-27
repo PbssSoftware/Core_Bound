@@ -1,0 +1,123 @@
+[gd_scene load_steps=12 format=3 uid="uid://g4qvwk7m6p4e"]
+
+[ext_resource type="Script" path="res://Scripts/attack_scripts/plague_slash_attack.gd" id="1_o6vtc"]
+[ext_resource type="Texture2D" uid="uid://3u3nmbh5t0su" path="res://Sprites/Body_parts_anims/Arms/arms_attacks/plague_arms_hit.png" id="2_nkthy"]
+[ext_resource type="Shader" path="res://Shaders/plague_slash_attack.gdshader" id="2_xg02i"]
+[ext_resource type="AudioStream" uid="uid://cu284jj6towc8" path="res://Sfx/plague_slash.mp3" id="5_577km"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qbbvv"]
+noise_type = 4
+frequency = 0.0012
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gwiao"]
+width = 15
+height = 100
+noise = SubResource("FastNoiseLite_qbbvv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5npc5"]
+shader = ExtResource("2_xg02i")
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/burn_size = null
+shader_parameter/dissolve_amount = 1.0
+shader_parameter/emission_amount = null
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_gwiao")
+
+[sub_resource type="Animation" id="Animation_ir02c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ng2xy"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjvms"]
+_data = {
+"RESET": SubResource("Animation_ir02c"),
+"attack": SubResource("Animation_ng2xy")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m503s"]
+radius = 19.2887
+height = 62.1302
+
+[node name="plague_slash_attack" type="Node2D"]
+top_level = true
+script = ExtResource("1_o6vtc")
+skill_type = "plague_arms"
+
+[node name="attack_texture" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5npc5")
+texture = ExtResource("2_nkthy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="attack_texture"]
+autoplay = "attack"
+speed_scale = 5.0
+libraries = {
+"": SubResource("AnimationLibrary_hjvms")
+}
+
+[node name="Vanish_timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="attack_area" type="Area2D" parent="."]
+scale = Vector2(4, 4)
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="attack_area"]
+rotation = -0.945968
+shape = SubResource("CapsuleShape2D_m503s")
+
+[node name="attack_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_577km")
+volume_db = -2.0
+pitch_scale = 1.47
+
+[connection signal="timeout" from="Vanish_timer" to="." method="_on_vanish_timer_timeout" flags=18]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]

@@ -1,0 +1,399 @@
+[gd_scene load_steps=17 format=3 uid="uid://beivpe550ifjr"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/basic_drill.gd" id="1_udgw4"]
+[ext_resource type="Texture2D" uid="uid://do1r6oh3weuml" path="res://Sprites/Body_parts_anims/Drills/basic_drill_idle.png" id="2_i8ykr"]
+[ext_resource type="Texture2D" uid="uid://db1l7pbe26885" path="res://Sprites/Body_parts_anims/Drills/basic_drill_spin.png" id="3_broof"]
+[ext_resource type="Texture2D" uid="uid://dcvmn0gr5ju6t" path="res://Sprites/Particles/luz_teste.png" id="4_eg4ad"]
+
+[sub_resource type="Animation" id="Animation_unwyr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Drill_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_light:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hit_light2:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SparkParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SparkParticles2:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_e08qg"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Drill_sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Drill_sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_i8ykr")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Drill_sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Drill_sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -32), Vector2(0, -29)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SparkParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SparkParticles2:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("hit_light:enabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("hit_light2:enabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ypvrn"]
+resource_name = "spin"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Drill_sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_broof")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Drill_sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Drill_sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SparkParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SparkParticles2:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Drill_sprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -33), Vector2(0, -27), Vector2(0, -33), Vector2(0, -27), Vector2(0, -33), Vector2(0, -27)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("hit_light:enabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("hit_light2:enabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mhqmv"]
+_data = {
+"RESET": SubResource("Animation_unwyr"),
+"idle": SubResource("Animation_e08qg"),
+"spin": SubResource("Animation_ypvrn")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q4rga"]
+light_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kauvo"]
+radius = 14.0
+
+[sub_resource type="Gradient" id="Gradient_bqy6m"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kn2uo"]
+gradient = SubResource("Gradient_bqy6m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n0p1l"]
+resource_local_to_scene = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+direction = Vector3(1, -1, 0)
+spread = 10.0
+gravity = Vector3(0, 300, 0)
+initial_velocity_min = 130.0
+initial_velocity_max = 200.0
+angular_velocity_min = 90.95
+angular_velocity_max = 90.95
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_max = 3.5
+color = Color(3, 1.8, 0, 1)
+color_ramp = SubResource("GradientTexture1D_kn2uo")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qu4a2"]
+radius = 3.16228
+
+[sub_resource type="Gradient" id="Gradient_comr4"]
+colors = PackedColorArray(0.815686, 0.807843, 0.478431, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gil1e"]
+gradient = SubResource("Gradient_comr4")
+width = 500
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.50463)
+fill_to = Vector2(0.837963, 0.217593)
+
+[node name="Basic_drill" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_udgw4")
+part_name = "Basic Drill"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mhqmv")
+}
+
+[node name="Drill_sprite" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_q4rga")
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("2_i8ykr")
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, -15)
+shape = SubResource("CircleShape2D_kauvo")
+
+[node name="SparkParticles" type="GPUParticles2D" parent="."]
+position = Vector2(-1, 15)
+scale = Vector2(1.5, 1.5)
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_n0p1l")
+lifetime = 0.8
+
+[node name="SparkParticles2" type="GPUParticles2D" parent="."]
+position = Vector2(-1, 15)
+rotation = -1.57079
+scale = Vector2(1.5, 1.5)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_n0p1l")
+lifetime = 0.8
+
+[node name="mining_point" type="Area2D" parent="."]
+visible = false
+position = Vector2(-1, 15)
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mining_point"]
+shape = SubResource("CircleShape2D_qu4a2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="hit_light" type="PointLight2D" parent="."]
+position = Vector2(-3.55271e-15, 15)
+scale = Vector2(0.1, 0.1)
+enabled = false
+color = Color(0.823529, 0.768627, 0, 0.737255)
+energy = 5.14
+texture = ExtResource("4_eg4ad")
+
+[node name="hit_light2" type="PointLight2D" parent="."]
+position = Vector2(0, 27)
+enabled = false
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_gil1e")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(0, 28)
+scale = Vector2(0.5, 0.5)
+color = Color(0.403922, 0.384314, 0.117647, 0.886275)
+shadow_enabled = true
+texture = ExtResource("4_eg4ad")
+
+[connection signal="body_entered" from="mining_point" to="." method="_on_mining_point_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

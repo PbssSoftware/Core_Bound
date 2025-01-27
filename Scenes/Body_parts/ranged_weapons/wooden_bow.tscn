@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5eokhlk2nvo4"]
+
+[ext_resource type="Script" path="res://Scripts/weapons_script/wooden_bow.gd" id="1_epmbc"]
+[ext_resource type="Texture2D" uid="uid://r1v55aex814f" path="res://Sprites/Body_parts_anims/weapons/ranged_weapons/wooden_bow_idle.png" id="1_t3nuh"]
+[ext_resource type="Texture2D" uid="uid://57hukcpmwi1s" path="res://Sprites/Body_parts_anims/hands/l_hand.png" id="2_1dl2a"]
+[ext_resource type="Texture2D" uid="uid://oe2x31b5gnl2" path="res://Sprites/Body_parts_anims/hands/r_hand.png" id="4_ww5pk"]
+
+[node name="wooden_bow" type="Node2D"]
+script = ExtResource("1_epmbc")
+
+[node name="weapon_sprite" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_t3nuh")
+
+[node name="hand_sprite" type="Sprite2D" parent="weapon_sprite"]
+position = Vector2(4, 0)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_1dl2a")
+
+[node name="hand_sprite2" type="Sprite2D" parent="weapon_sprite"]
+position = Vector2(-2.33333, 1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_ww5pk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

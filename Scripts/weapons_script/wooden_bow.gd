@@ -1,0 +1,2 @@
+extends ranged_weapon
+class_name wooden_bow

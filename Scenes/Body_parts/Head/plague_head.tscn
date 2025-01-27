@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvqn2vtw10205"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/plague_head.gd" id="1_cnau5"]
+[ext_resource type="Texture2D" uid="uid://50fdk7ikvp82" path="res://Sprites/Body_parts_anims/Head/plague_head.png" id="2_1md6c"]
+
+[sub_resource type="Animation" id="Animation_xsfcy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_31tpt"]
+resource_name = "head"
+length = 3.0
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 6), Vector2(0, 6), Vector2(0, 6), Vector2(0, 3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_1md6c")]
+}
+
+[sub_resource type="Animation" id="Animation_bidt2"]
+resource_name = "head_run"
+length = 2.3
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_1md6c")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_flqkc"]
+_data = {
+"RESET": SubResource("Animation_xsfcy"),
+"head": SubResource("Animation_31tpt"),
+"head_run": SubResource("Animation_bidt2")
+}
+
+[node name="plague_head" type="Node2D"]
+script = ExtResource("1_cnau5")
+part_name = "plague-head"
+hp_modifier = 25
+defense_modifier = 10
+
+[node name="head_texture" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(3, 3)
+texture = ExtResource("2_1md6c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="head_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_flqkc")
+}

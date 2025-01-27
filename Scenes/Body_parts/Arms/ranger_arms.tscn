@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccvdc8e3tlx2u"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/ranger_arms.gd" id="1_2vx33"]
+[ext_resource type="Texture2D" uid="uid://cljiekue6ahh" path="res://Sprites/Body_parts_anims/Arms/right_ranger_arm.png" id="2_l5qhu"]
+[ext_resource type="Texture2D" uid="uid://dlrrrlymen64y" path="res://Sprites/Body_parts_anims/Arms/left_ranger_arm.png" id="3_dr6ck"]
+
+[sub_resource type="Animation" id="Animation_hr8mw"]
+resource_name = "arms"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 6), Vector2(0, 6), Vector2(0, 6), Vector2(0, 3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vjwqi"]
+resource_name = "arms_run"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c4bvt"]
+_data = {
+"arms": SubResource("Animation_hr8mw"),
+"arms_run": SubResource("Animation_vjwqi")
+}
+
+[node name="ranger_arms" type="Node2D"]
+script = ExtResource("1_2vx33")
+
+[node name="Arms_texture" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-4.50272, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("2_l5qhu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Arms_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_c4bvt")
+}
+
+[node name="Arms2" type="Sprite2D" parent="Arms_texture"]
+z_index = -2
+position = Vector2(1.50091, 0)
+texture = ExtResource("3_dr6ck")

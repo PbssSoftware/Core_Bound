@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkm12qtasic0"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/pumpkin_chest.gd" id="1_yupqs"]
+[ext_resource type="Texture2D" uid="uid://couqtfpsrj5x3" path="res://Sprites/Body_parts_anims/Chest/pumpkin_chest.png" id="2_u02l0"]
+
+[sub_resource type="Animation" id="Animation_rquci"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nhvbq"]
+resource_name = "chest"
+length = 3.0
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3), Vector2(0, 3), Vector2(0, 0), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_u02l0")]
+}
+
+[sub_resource type="Animation" id="Animation_2ep6b"]
+resource_name = "chest_run"
+length = 2.3
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, -6), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3), Vector2(0, -6), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_u02l0")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f660d"]
+_data = {
+"RESET": SubResource("Animation_rquci"),
+"chest": SubResource("Animation_nhvbq"),
+"chest_run": SubResource("Animation_2ep6b")
+}
+
+[node name="pumpkin_chest" type="Node2D"]
+script = ExtResource("1_yupqs")
+part_name = "pumpkin_chest"
+hp_modifier = 25
+defense_modifier = 10
+
+[node name="Chest_texture" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_u02l0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Chest_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_f660d")
+}
+
+[node name="Detection_area" type="Area2D" parent="."]

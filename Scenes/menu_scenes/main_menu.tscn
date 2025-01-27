@@ -1,0 +1,335 @@
+[gd_scene load_steps=23 format=3 uid="uid://brmup1x7n4q5t"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_br4qg"]
+[ext_resource type="Texture2D" uid="uid://o54dukris6k3" path="res://Sprites/Cores/mage_core.png" id="2_i6iad"]
+[ext_resource type="Texture2D" uid="uid://dew3j36ymllaq" path="res://Sprites/Cores/ranger_core.png" id="3_p28dp"]
+[ext_resource type="Texture2D" uid="uid://mp0g4twvysiy" path="res://Sprites/Cores/warrior_core.png" id="3_wav8h"]
+
+[sub_resource type="Animation" id="Animation_fbp6p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control_core_selection:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6gomh"]
+resource_name = "show_selection"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control_core_selection:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lyf83"]
+_data = {
+"RESET": SubResource("Animation_fbp6p"),
+"show_selection": SubResource("Animation_6gomh")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_wtpt0"]
+font_size = 45
+font_color = Color(0, 0.00392157, 0, 1)
+outline_size = 4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0oyu"]
+atlas = ExtResource("2_i6iad")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmpa1"]
+atlas = ExtResource("2_i6iad")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb10x"]
+atlas = ExtResource("2_i6iad")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa1vo"]
+atlas = ExtResource("2_i6iad")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptacm"]
+atlas = ExtResource("3_p28dp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt718"]
+atlas = ExtResource("3_p28dp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8e6m"]
+atlas = ExtResource("3_p28dp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmvaf"]
+atlas = ExtResource("3_p28dp")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jremq"]
+atlas = ExtResource("3_wav8h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmmn2"]
+atlas = ExtResource("3_wav8h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6sgr"]
+atlas = ExtResource("3_wav8h")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xohhb"]
+atlas = ExtResource("3_wav8h")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e3dw4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0oyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmpa1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yb10x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa1vo")
+}],
+"loop": true,
+"name": &"mage_core",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptacm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt718")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8e6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmvaf")
+}],
+"loop": true,
+"name": &"ranger_core",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jremq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmmn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6sgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xohhb")
+}],
+"loop": true,
+"name": &"warrior_core",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eansp"]
+font_size = 25
+font_color = Color(0, 0, 0, 1)
+outline_size = 3
+
+[node name="Main_menu" type="Node2D"]
+script = ExtResource("1_br4qg")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Menu_player" type="AnimationPlayer" parent="GUI"]
+libraries = {
+"": SubResource("AnimationLibrary_lyf83")
+}
+
+[node name="new_game_button" type="Button" parent="GUI"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 22.0
+offset_top = 297.0
+offset_right = 322.0
+offset_bottom = 347.0
+text = "        NEW RUN"
+alignment = 0
+
+[node name="quit_game_button" type="Button" parent="GUI"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 22.0
+offset_top = 678.0
+offset_right = 322.0
+offset_bottom = 728.0
+text = "QUIT
+"
+
+[node name="Control_core_selection" type="Control" parent="GUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1e-05, 1e-05)
+
+[node name="selection_label" type="Label" parent="GUI/Control_core_selection"]
+layout_mode = 2
+offset_left = 626.0
+offset_top = 80.0
+offset_right = 1026.0
+offset_bottom = 146.0
+text = "Select your core"
+label_settings = SubResource("LabelSettings_wtpt0")
+
+[node name="Core_selection" type="HBoxContainer" parent="GUI/Control_core_selection"]
+layout_mode = 1
+offset_left = 350.0
+offset_top = 145.0
+offset_right = 1258.0
+offset_bottom = 745.0
+theme_override_constants/separation = 7
+
+[node name="warrior_core" type="ColorRect" parent="GUI/Control_core_selection/Core_selection"]
+self_modulate = Color(0.364706, 0.32549, 0.329412, 1)
+custom_minimum_size = Vector2(300, 600)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="GUI/Control_core_selection/Core_selection/warrior_core"]
+self_modulate = Color(0.105882, 0.105882, 0.105882, 1)
+layout_mode = 0
+offset_left = 75.0
+offset_top = 95.0
+offset_right = 225.0
+offset_bottom = 245.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Control_core_selection/Core_selection/warrior_core/ColorRect"]
+position = Vector2(75, 76)
+scale = Vector2(3.14, 3.14)
+sprite_frames = SubResource("SpriteFrames_e3dw4")
+animation = &"warrior_core"
+autoplay = "warrior_core"
+
+[node name="Label" type="Label" parent="GUI/Control_core_selection/Core_selection/warrior_core"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 261.0
+offset_right = 236.0
+offset_bottom = 299.0
+text = "Warrior's Core
+"
+label_settings = SubResource("LabelSettings_eansp")
+
+[node name="mage_core" type="ColorRect" parent="GUI/Control_core_selection/Core_selection"]
+self_modulate = Color(0.364706, 0.32549, 0.329412, 1)
+custom_minimum_size = Vector2(300, 600)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="GUI/Control_core_selection/Core_selection/mage_core"]
+self_modulate = Color(0.105882, 0.105882, 0.105882, 1)
+layout_mode = 0
+offset_left = 75.0
+offset_top = 95.0
+offset_right = 225.0
+offset_bottom = 245.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Control_core_selection/Core_selection/mage_core/ColorRect"]
+position = Vector2(75, 76)
+scale = Vector2(3.14, 3.14)
+sprite_frames = SubResource("SpriteFrames_e3dw4")
+animation = &"mage_core"
+autoplay = "mage_core"
+
+[node name="Label" type="Label" parent="GUI/Control_core_selection/Core_selection/mage_core"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 261.0
+offset_right = 245.0
+offset_bottom = 299.0
+text = "Mage's Core
+"
+label_settings = SubResource("LabelSettings_eansp")
+
+[node name="ranger_core" type="ColorRect" parent="GUI/Control_core_selection/Core_selection"]
+self_modulate = Color(0.364706, 0.32549, 0.329412, 1)
+custom_minimum_size = Vector2(300, 600)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="GUI/Control_core_selection/Core_selection/ranger_core"]
+self_modulate = Color(0.105882, 0.105882, 0.105882, 1)
+layout_mode = 0
+offset_left = 75.0
+offset_top = 95.0
+offset_right = 225.0
+offset_bottom = 245.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Control_core_selection/Core_selection/ranger_core/ColorRect"]
+position = Vector2(75, 76)
+scale = Vector2(3.14, 3.14)
+sprite_frames = SubResource("SpriteFrames_e3dw4")
+animation = &"ranger_core"
+autoplay = "ranger_core"
+
+[node name="Label" type="Label" parent="GUI/Control_core_selection/Core_selection/ranger_core"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 261.0
+offset_right = 236.0
+offset_bottom = 299.0
+text = "Ranger's Core
+"
+label_settings = SubResource("LabelSettings_eansp")
+
+[node name="selection_close_button" type="Button" parent="GUI/Control_core_selection"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 1290.0
+offset_top = 95.0
+offset_right = 1298.0
+offset_bottom = 103.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "X"
+
+[node name="select_button" type="Button" parent="GUI/Control_core_selection"]
+layout_mode = 0
+offset_left = 1083.0
+offset_top = 770.0
+offset_right = 1233.0
+offset_bottom = 820.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 28
+text = "Confirm"
+
+[connection signal="pressed" from="GUI/new_game_button" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="GUI/quit_game_button" to="." method="_on_quit_game_button_pressed"]
+[connection signal="gui_input" from="GUI/Control_core_selection/Core_selection/warrior_core" to="." method="_on_warrior_core_gui_input"]
+[connection signal="gui_input" from="GUI/Control_core_selection/Core_selection/mage_core" to="." method="_on_mage_core_gui_input"]
+[connection signal="gui_input" from="GUI/Control_core_selection/Core_selection/ranger_core" to="." method="_on_ranger_core_gui_input"]
+[connection signal="pressed" from="GUI/Control_core_selection/selection_close_button" to="." method="_on_selection_close_button_pressed"]
+[connection signal="pressed" from="GUI/Control_core_selection/select_button" to="." method="_on_select_button_pressed"]

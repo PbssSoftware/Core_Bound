@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="body_manager_resource" load_steps=2 format=3 uid="uid://dufav8bexmc7j"]
+
+[ext_resource type="Script" path="res://Resources/Scripts/body_manager_resource.gd" id="1_m4a7p"]
+
+[resource]
+script = ExtResource("1_m4a7p")
+has_part = false

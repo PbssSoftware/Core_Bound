@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://bda0aru3brckb"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/plague_chest.gd" id="1_vcpv1"]
+[ext_resource type="Texture2D" uid="uid://d2gmwhvuyslru" path="res://Sprites/Body_parts_anims/Chest/plague_chest.png" id="2_8xlkw"]
+
+[sub_resource type="Animation" id="Animation_tvyf6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kyxvk"]
+resource_name = "chest"
+length = 3.0
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8xlkw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3), Vector2(0, 3), Vector2(0, 0), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_q6m8f"]
+resource_name = "chest_run"
+length = 2.3
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8xlkw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, -6), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3), Vector2(0, -6), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6rlfr"]
+_data = {
+"RESET": SubResource("Animation_tvyf6"),
+"chest": SubResource("Animation_kyxvk"),
+"chest_run": SubResource("Animation_q6m8f")
+}
+
+[node name="plague_chest" type="Node2D"]
+script = ExtResource("1_vcpv1")
+hp_modifier = 25
+defense_modifier = 10
+
+[node name="Chest_texture" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_8xlkw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Chest_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_6rlfr")
+}
+
+[node name="Detection_area" type="Area2D" parent="."]

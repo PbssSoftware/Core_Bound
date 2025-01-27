@@ -1,0 +1,187 @@
+[gd_scene load_steps=14 format=3 uid="uid://y1v2u4wgccet"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/regular_arms.gd" id="1_k4vmu"]
+[ext_resource type="Script" path="res://Resources/Scripts/Body_part_upgrade.gd" id="2_5n8jl"]
+[ext_resource type="Texture2D" uid="uid://bqhkcfkoo37ur" path="res://Sprites/Body_parts_anims/Arms/right_regular_arm.png" id="2_ev60q"]
+[ext_resource type="PackedScene" uid="uid://cemkndavm3xv8" path="res://Scenes/Body_parts/Arms/attacks/regular_fists_attack.tscn" id="2_jnm0o"]
+[ext_resource type="Texture2D" uid="uid://bmt5t7h0x40wv" path="res://Sprites/Body_parts_anims/Arms/left_regular_arm.png" id="3_mqx51"]
+
+[sub_resource type="Resource" id="Resource_ad4c2"]
+script = ExtResource("2_5n8jl")
+skill_speed = 400
+skill_cooldown = 1.0
+skill_dmg = 2.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 1
+hp_modifier = 25
+defense_modifier = 1
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Resource" id="Resource_5mosd"]
+script = ExtResource("2_5n8jl")
+skill_speed = 150
+skill_cooldown = 0.6
+skill_dmg = 5.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 2
+hp_modifier = 30
+defense_modifier = 2
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Animation" id="Animation_v65d5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_dscoa"]
+resource_name = "arms"
+length = 3.0
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ev60q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_mqx51")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 6), Vector2(0, 6), Vector2(0, 6), Vector2(0, 3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Arm2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_glhmh"]
+resource_name = "arms_run"
+length = 2.3
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ev60q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mr0b2"]
+_data = {
+"RESET": SubResource("Animation_v65d5"),
+"arms": SubResource("Animation_dscoa"),
+"arms_run": SubResource("Animation_glhmh")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_diciy"]
+radius = 154.742
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ow08g"]
+radius = 126.0
+
+[node name="regular_arms" type="Node2D"]
+script = ExtResource("1_k4vmu")
+level_upgrader = Array[ExtResource("2_5n8jl")]([SubResource("Resource_ad4c2"), SubResource("Resource_5mosd")])
+part_name = "Regular Arms"
+core_scaling_type = "warrior_core"
+attack_scene = ExtResource("2_jnm0o")
+
+[node name="Arms_texture" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(3, 3)
+texture = ExtResource("2_ev60q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Arms_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_mr0b2")
+}
+
+[node name="Arm2" type="Sprite2D" parent="Arms_texture"]
+show_behind_parent = true
+z_index = -2
+texture = ExtResource("3_mqx51")
+
+[node name="Detection_area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_area"]
+shape = SubResource("CircleShape2D_diciy")
+
+[node name="range_area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="range_area"]
+shape = SubResource("CircleShape2D_ow08g")
+
+[node name="atk_cooldown_timer" type="Timer" parent="."]
+
+[node name="skill_spwn_loc" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="Detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="range_area" to="." method="_on_range_area_body_entered"]
+[connection signal="timeout" from="atk_cooldown_timer" to="." method="_on_atk_cooldown_timer_timeout"]

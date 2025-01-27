@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://drukeoyanwrfl"]
+
+[ext_resource type="Script" path="res://Scripts/crystal_counter_gui.gd" id="1_t6s2o"]
+
+[node name="crystal_counter_gui" type="TextureRect"]
+scale = Vector2(5, 5)
+stretch_mode = 2
+script = ExtResource("1_t6s2o")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_right = 64.0
+offset_bottom = 26.0

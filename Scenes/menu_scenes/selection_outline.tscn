@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dba2mbh0iird"]
+
+[ext_resource type="Texture2D" uid="uid://bjll0lanpik46" path="res://Sprites/GUI/selection_outline.png" id="1_r1cii"]
+
+[node name="selection_outline" type="Sprite2D"]
+texture = ExtResource("1_r1cii")

@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://clkyldtnwxpl4"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Rand_spawners.gd" id="1_l0unf"]
+[ext_resource type="Script" path="res://Scripts/Structures/spawner.gd" id="2_nqs7b"]
+
+[node name="Rand_spawners" type="Node2D"]
+script = ExtResource("1_l0unf")
+
+[node name="Center_marker" type="Marker2D" parent="."]
+
+[node name="spawners_father" type="Node2D" parent="."]
+
+[node name="spawner" type="Marker2D" parent="spawners_father"]
+position = Vector2(-77, -58)
+script = ExtResource("2_nqs7b")
+
+[node name="spawner9" type="Marker2D" parent="spawners_father"]
+position = Vector2(-103, -142)
+
+[node name="spawner10" type="Marker2D" parent="spawners_father"]
+position = Vector2(23, 156)
+
+[node name="spawner2" type="Marker2D" parent="spawners_father"]
+position = Vector2(6, -78)
+
+[node name="spawner3" type="Marker2D" parent="spawners_father"]
+position = Vector2(82, -37)
+
+[node name="spawner4" type="Marker2D" parent="spawners_father"]
+position = Vector2(12, 82)
+
+[node name="spawner5" type="Marker2D" parent="spawners_father"]
+position = Vector2(-71, 44)
+
+[node name="spawner6" type="Marker2D" parent="spawners_father"]
+position = Vector2(99, 45)
+
+[node name="spawner7" type="Marker2D" parent="spawners_father"]
+position = Vector2(165, -15)
+
+[node name="spawner8" type="Marker2D" parent="spawners_father"]
+position = Vector2(-147, 3)

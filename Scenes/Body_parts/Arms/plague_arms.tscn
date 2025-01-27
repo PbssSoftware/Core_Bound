@@ -1,0 +1,176 @@
+[gd_scene load_steps=14 format=3 uid="uid://b0xqap13sp111"]
+
+[ext_resource type="Script" path="res://Scripts/base_body_scripts/plague_arms.gd" id="1_2g6js"]
+[ext_resource type="Script" path="res://Resources/Scripts/Body_part_upgrade.gd" id="2_an6fk"]
+[ext_resource type="Texture2D" uid="uid://dqtyff4n6tc01" path="res://Sprites/Body_parts_anims/Arms/right_plague_arms.png" id="2_dpuop"]
+[ext_resource type="PackedScene" uid="uid://g4qvwk7m6p4e" path="res://Scenes/Body_parts/Arms/attacks/plague_slash_attack.tscn" id="2_grsa1"]
+[ext_resource type="Texture2D" uid="uid://djj5i18b3fewu" path="res://Sprites/Body_parts_anims/Arms/left_plague_arms.png" id="3_wcq4j"]
+
+[sub_resource type="Resource" id="Resource_itix1"]
+script = ExtResource("2_an6fk")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 10.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 1
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.2
+speed_modifier = 0
+
+[sub_resource type="Resource" id="Resource_lqhn8"]
+script = ExtResource("2_an6fk")
+skill_speed = 0
+skill_cooldown = 0.0
+skill_dmg = 4.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 2
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.5
+speed_modifier = 0
+
+[sub_resource type="Animation" id="Animation_gws0d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_1o1am"]
+resource_name = "arms"
+length = 3.0
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_dpuop")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_wcq4j")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 6), Vector2(0, 6), Vector2(0, 6), Vector2(0, 3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xbcrt"]
+resource_name = "arms_run"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_dpuop")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bj4yc"]
+_data = {
+"RESET": SubResource("Animation_gws0d"),
+"arms": SubResource("Animation_1o1am"),
+"arms_run": SubResource("Animation_xbcrt")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5en1k"]
+radius = 509.035
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74gx6"]
+radius = 49.0
+height = 118.0
+
+[node name="plague_arms" type="Node2D"]
+script = ExtResource("1_2g6js")
+level_upgrader = Array[ExtResource("2_an6fk")]([SubResource("Resource_itix1"), SubResource("Resource_lqhn8")])
+core_scaling_type = "mage_core"
+attack_scene = ExtResource("2_grsa1")
+
+[node name="Arms_texture" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(3, 3)
+texture = ExtResource("2_dpuop")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Arms_texture"]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_bj4yc")
+}
+
+[node name="Arm2" type="Sprite2D" parent="Arms_texture"]
+z_index = -2
+texture = ExtResource("3_wcq4j")
+
+[node name="Detection_area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_area"]
+shape = SubResource("CircleShape2D_5en1k")
+
+[node name="range_area" type="Area2D" parent="."]
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="range_area"]
+position = Vector2(96, 0)
+shape = SubResource("CapsuleShape2D_74gx6")
+
+[node name="atk_cooldown_timer" type="Timer" parent="."]
+
+[node name="skill_spwn_loc" type="Marker2D" parent="."]
+position = Vector2(100, 0)
+
+[connection signal="body_entered" from="Detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="range_area" to="." method="_on_range_area_body_entered"]
+[connection signal="timeout" from="atk_cooldown_timer" to="." method="_on_atk_cooldown_timer_timeout"]

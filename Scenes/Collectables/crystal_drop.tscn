@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://6hqypoxtq1td"]
+
+[ext_resource type="Script" path="res://Scripts/collectables/crystal_drop.gd" id="1_orcgh"]
+[ext_resource type="Texture2D" uid="uid://dlka513nonror" path="res://Sprites/Collectables/common_crystal_drop.png" id="2_hl5l8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n380j"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qtgre"]
+radius = 15.2971
+
+[node name="crystal_drop" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 8
+gravity_scale = 0.0
+script = ExtResource("1_orcgh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_hl5l8")
+
+[node name="item_area" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="item_area"]
+shape = SubResource("CircleShape2D_n380j")
+
+[node name="drop_collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_qtgre")
+
+[connection signal="area_entered" from="item_area" to="." method="_on_item_area_area_entered"]
+[connection signal="body_entered" from="item_area" to="." method="_on_item_area_body_entered"]

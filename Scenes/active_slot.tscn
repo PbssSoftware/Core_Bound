@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dalvla15m6y2x"]
+
+[ext_resource type="PackedScene" uid="uid://brj3gmp7ureo3" path="res://Scenes/inv_slot.tscn" id="1_a1ppy"]
+[ext_resource type="Script" path="res://Scripts/active_slot.gd" id="2_y4sip"]
+
+[node name="active_slot" instance=ExtResource("1_a1ppy")]
+custom_minimum_size = Vector2(60, 60)
+script = ExtResource("2_y4sip")
+
+[node name="Name_label" parent="TextureRect/ColorRect" index="1"]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 60.0
+offset_top = 3.0
+offset_right = 178.0
+offset_bottom = 29.0
+grow_horizontal = 1

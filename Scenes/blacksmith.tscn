@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://bxs5s8s16klia"]
+
+[ext_resource type="Script" path="res://Scripts/blacksmith.gd" id="1_olk1a"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w58wv"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_71l0m"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vcvm2"]
+gradient = SubResource("Gradient_71l0m")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jns54"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3hpq"]
+size = Vector2(142, 45)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4wtj4"]
+light_mode = 1
+
+[sub_resource type="Animation" id="Animation_ylo7e"]
+resource_name = "show_label"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7sa5y"]
+_data = {
+"show_label": SubResource("Animation_ylo7e")
+}
+
+[node name="blacksmith" type="StaticBody2D" groups=["blacksmith"]]
+process_mode = 3
+script = ExtResource("1_olk1a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_w58wv")
+texture = SubResource("GradientTexture2D_vcvm2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_jns54")
+
+[node name="blacksmith_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blacksmith_area"]
+position = Vector2(0, 65)
+shape = SubResource("RectangleShape2D_c3hpq")
+
+[node name="window_pos" type="Marker2D" parent="."]
+position = Vector2(0, -151)
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 2
+material = SubResource("CanvasItemMaterial_4wtj4")
+offset_left = -8.0
+offset_top = -84.0
+offset_right = 5.0
+offset_bottom = -47.0
+theme_override_font_sizes/font_size = 24
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7sa5y")
+}
+
+[connection signal="body_entered" from="blacksmith_area" to="." method="_on_blacksmith_area_body_entered"]
+[connection signal="body_exited" from="blacksmith_area" to="." method="_on_blacksmith_area_body_exited"]

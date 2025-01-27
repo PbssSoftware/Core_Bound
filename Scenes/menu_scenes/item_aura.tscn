@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://owa6wmphswdl"]
+
+[ext_resource type="Texture2D" uid="uid://dp2c1uudhg34w" path="res://Sprites/Particles/random_selection.png" id="1_h0j87"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wvdny"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_kuy61"]
+offsets = PackedFloat32Array(0, 0.525926, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p3pem"]
+gradient = SubResource("Gradient_kuy61")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vvqfm"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 360.0
+scale_min = 0.2
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_p3pem")
+anim_offset_max = 1.0
+
+[node name="item_aura" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_wvdny")
+process_material = SubResource("ParticleProcessMaterial_vvqfm")
+texture = ExtResource("1_h0j87")
+local_coords = true

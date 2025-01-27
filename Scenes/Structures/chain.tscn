@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjofnp14gepgu"]
+
+[ext_resource type="Texture2D" uid="uid://dtcjlh0e2db86" path="res://Sprites/Constructions/chain.png" id="1_ok02o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ciwit"]
+radius = 5.0
+height = 50.0
+
+[node name="chain" type="RigidBody2D"]
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("1_ok02o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ciwit")

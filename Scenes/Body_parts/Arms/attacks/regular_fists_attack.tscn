@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://cemkndavm3xv8"]
+
+[ext_resource type="Script" path="res://Scripts/attack_scripts/regular_fists_attack.gd" id="1_8rt3o"]
+[ext_resource type="Texture2D" uid="uid://dow1naymufiw5" path="res://Sprites/Body_parts_anims/Arms/arms_attacks/regular_arms_hit.png" id="2_6abwd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0c5y"]
+radius = 20.0
+height = 83.0
+
+[node name="Regular_fists_attack" type="Node2D"]
+modulate = Color(0.803922, 0.803922, 0.803922, 1)
+top_level = true
+z_index = 4
+script = ExtResource("1_8rt3o")
+skill_type = "regular_arms"
+
+[node name="attack_texture" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_6abwd")
+
+[node name="Vanish_timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="attack_area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+position = Vector2(4, 2)
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_n0c5y")
+
+[connection signal="timeout" from="Vanish_timer" to="." method="_on_vanish_timer_timeout" flags=18]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]

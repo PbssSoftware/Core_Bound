@@ -1,0 +1,148 @@
+[gd_scene load_steps=15 format=3 uid="uid://dxigvxoeqosh3"]
+
+[ext_resource type="Script" path="res://Scripts/collectables/dropped_item.gd" id="1_en4ol"]
+[ext_resource type="Shader" path="res://Shaders/item_highlight.gdshader" id="2_72uix"]
+[ext_resource type="Texture2D" uid="uid://b5rai3fty4qle" path="res://Sprites/Particles/item_rarity.png" id="4_syb2i"]
+
+[sub_resource type="Gradient" id="Gradient_7tpsq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rkcrq"]
+gradient = SubResource("Gradient_7tpsq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pqpdw"]
+emission_shape = 3
+emission_box_extents = Vector3(20, 10, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, -60, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 90.9
+scale_min = 3.0
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_rkcrq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nveni"]
+shader = ExtResource("2_72uix")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_progress = 1.0
+shader_parameter/shine_size = 0.1
+shader_parameter/shine_angle = 45.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvcet"]
+radius = 24.0
+
+[sub_resource type="Animation" id="Animation_exolo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shine_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_lgfdj"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shine_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3tui"]
+_data = {
+"RESET": SubResource("Animation_exolo"),
+"idle": SubResource("Animation_lgfdj")
+}
+
+[sub_resource type="Gradient" id="Gradient_bhyq3"]
+offsets = PackedFloat32Array(0, 0.696774)
+colors = PackedColorArray(0.741385, 0.741385, 0.741385, 1, 0, 0, 0, 0.517647)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j2oiu"]
+gradient = SubResource("Gradient_bhyq3")
+width = 150
+height = 150
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ygasc"]
+light_mode = 1
+
+[node name="DroppedItem" type="Node2D"]
+script = ExtResource("1_en4ol")
+
+[node name="aura_particles" type="GPUParticles2D" parent="."]
+z_index = 2
+position = Vector2(0, 24)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_pqpdw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_nveni")
+position = Vector2(0, -3)
+scale = Vector2(2.5, 2.5)
+
+[node name="item_area" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="item_area"]
+shape = SubResource("CircleShape2D_wvcet")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_b3tui")
+}
+
+[node name="item_light" type="PointLight2D" parent="."]
+color = Color(0.537255, 0.537255, 0.537255, 1)
+texture = SubResource("GradientTexture2D_j2oiu")
+
+[node name="item_rarity" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_ygasc")
+position = Vector2(0, 20)
+scale = Vector2(3, 3)
+texture = ExtResource("4_syb2i")
+offset = Vector2(1, 0)
+
+[connection signal="body_entered" from="item_area" to="." method="_on_item_area_body_entered"]
