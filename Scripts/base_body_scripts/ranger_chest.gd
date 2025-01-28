@@ -1,1 +1,2 @@
 extends base_chest
+class_name ranger_chest

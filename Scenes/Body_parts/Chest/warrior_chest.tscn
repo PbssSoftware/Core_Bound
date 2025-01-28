@@ -73,7 +73,6 @@ part_name = "Warrior Chest"
 
 [node name="Chest_texture" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(0, -3)
 scale = Vector2(3, 3)
 texture = ExtResource("1_ma6y4")
 

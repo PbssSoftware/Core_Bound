@@ -1,56 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv84glsvckn1k"]
+[gd_scene load_steps=3 format=3 uid="uid://cv84glsvckn1k"]
 
 [ext_resource type="Script" path="res://Scripts/base_body_scripts/ranger_chest.gd" id="1_m8k05"]
 [ext_resource type="Texture2D" uid="uid://c1b2dwt8afbe5" path="res://Sprites/Body_parts_anims/Chest/ranger_chest.png" id="2_68fag"]
-
-[sub_resource type="Animation" id="Animation_3rmqw"]
-resource_name = "chest"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, -3), Vector2(0, 0), Vector2(0, 3), Vector2(0, 3), Vector2(0, 3), Vector2(0, 0), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3)]
-}
-
-[sub_resource type="Animation" id="Animation_kd5xv"]
-resource_name = "chest_run"
-length = 2.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2, 2.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, -3), Vector2(0, -6), Vector2(0, -3), Vector2(0, -3), Vector2(0, -3), Vector2(0, -6), Vector2(0, -3), Vector2(0, 0), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_djf7h"]
-_data = {
-"chest": SubResource("Animation_3rmqw"),
-"chest_run": SubResource("Animation_kd5xv")
-}
 
 [node name="ranger_chest" type="Node2D"]
 script = ExtResource("1_m8k05")
 
 [node name="Chest_texture" type="Sprite2D" parent="."]
-position = Vector2(0, -3)
 scale = Vector2(3, 3)
 texture = ExtResource("2_68fag")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Chest_texture"]
-speed_scale = 2.0
-libraries = {
-"": SubResource("AnimationLibrary_djf7h")
-}

@@ -210,8 +210,8 @@ core_scaling_type = "warrior_core"
 [node name="legs_texture" type="Sprite2D" parent="."]
 z_index = -2
 scale = Vector2(3, 3)
-texture = ExtResource("2_ebq5d")
-hframes = 8
+texture = ExtResource("2_hddc0")
+hframes = 10
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="legs_texture"]
