@@ -101,27 +101,27 @@ enemy_array = Array[ExtResource("5_g7stk")]([SubResource("Resource_4mlsx")])
 
 [node name="DroppedItem1" parent="." instance=ExtResource("4_u1ep2")]
 z_index = 2
-position = Vector2(992, 884)
+position = Vector2(992, 860)
 part_level = 1
 
 [node name="DroppedItem2" parent="." instance=ExtResource("4_u1ep2")]
 z_index = 2
-position = Vector2(930, 662)
+position = Vector2(930, 638)
 part_level = 1
 
 [node name="DroppedItem3" parent="." instance=ExtResource("4_u1ep2")]
 z_index = 2
-position = Vector2(736, 652)
+position = Vector2(736, 628)
 part_level = 1
 
 [node name="DroppedItem4" parent="." instance=ExtResource("4_u1ep2")]
 z_index = 2
-position = Vector2(544, 690)
+position = Vector2(544, 666)
 part_level = 1
 
 [node name="DroppedItem6" parent="." instance=ExtResource("4_u1ep2")]
 z_index = 2
-position = Vector2(481, 855)
+position = Vector2(481, 831)
 part_level = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

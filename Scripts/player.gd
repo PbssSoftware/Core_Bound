@@ -6,18 +6,19 @@ class_name Player
 @onready var ItemOptions = preload("res://Scenes/upgrade_options.tscn")
 @onready var H_container = $GUILayer/GUI/Panel/HBoxContainer
 @onready var camera = $Camera2D
-@onready var l_arm = $Body/l_arm
-@onready var r_arm = $Body/r_arm
-var collected_upgrades = [] #apenas sendo usado para referencia das opções de upgrades futuros (prerequisites)
-var upgrade_options = []
+@onready var l_arm : Node2D = $Body/l_arm
+@onready var r_arm : Node2D= $Body/r_arm
+@onready var legs : Node2D = $Body/legs
+var collected_upgrades : Array = [] #apenas sendo usado para referencia das opções de upgrades futuros (prerequisites)
+var upgrade_options : Array = []
 var player_health : int = 100
 
-var common_crystal = 10
-var grand_crystal = 10
-var arcane_crystal = 10
-var heroic_crystal = 10 
-var unique_crystal = 10
-var celestial_crystal = 10
+var common_crystal : int = 10
+var grand_crystal : int = 10
+var arcane_crystal : int = 10
+var heroic_crystal : int = 10 
+var unique_crystal : int = 10
+var celestial_crystal : int = 10
 
 
 var xp_level_cap = 100
@@ -29,7 +30,8 @@ func _ready():
 	$GUILayer/GUI/inventory_bg_texture/core_placeholder/core_GUI.play(Global.current_core)
 	Global.player = self
 
-
+func _process(delta):
+	check_equipped()
 
 func upgrade_character(upgrade):
 	var container_children = H_container.get_children()
@@ -68,6 +70,7 @@ func _physics_process(_delta):
 	move_and_slide()
 	update_xp_bar()
 
+
 func update_xp_bar():
 	$GUILayer/GUI/XPProgressBar.value = Global.player_experience
 	$GUILayer/GUI/XPProgressBar.max_value = xp_level_cap
@@ -78,7 +81,10 @@ func input_handle():
 	velocity.x = Input.get_action_strength("D_KEY") - Input.get_action_strength("A_KEY")
 	
 	if velocity != Vector2.ZERO:
-		$Body/player_anim.play("run")
+		if legs.get_child_count() != 0:
+			$Body/player_anim.play("run")
+		else:
+			$Body/player_anim.play("idle")
 		$Dust_particle.emitting = true
 		velocity = Global.player_speed * velocity.normalized()
 	else:
@@ -86,13 +92,19 @@ func input_handle():
 		velocity = Vector2.ZERO
 		$Dust_particle.emitting = false
 	if velocity.x > 0:
-		Global.is_facing_right = true
+		$Body/pinpoint/player_soul_head.flip_h = false
+		$Body/pinpoint/player_soul_chest.flip_h = false
+		$Body/player_soul_leg.flip_h = false
+		Global.is_facing_right = true#terminar de fazer isso para corrigir o spawn dos equipamentos na direçao que o player olha
 		l_arm.position.x = 30
 		r_arm.position.x = -30
 		drill_place.position.x = -180
 		$Dust_particle.scale.x = -1
 		$core_texture.flip_h = true
 	if velocity.x < 0:
+		$Body/pinpoint/player_soul_head.flip_h = true
+		$Body/pinpoint/player_soul_chest.flip_h = true
+		$Body/player_soul_leg.flip_h = true
 		Global.is_facing_right = false
 		l_arm.position.x = -30
 		r_arm.position.x = 30
@@ -189,3 +201,19 @@ func reset_animation():
 	var player_anim : AnimationPlayer = $Body/player_anim
 	player_anim.stop()
 
+func check_equipped():
+	if $Body/pinpoint/head.get_child_count() != 0:
+		$Body/pinpoint/player_soul_head.visible = false
+	else:
+		$Body/pinpoint/player_soul_head.visible = true
+	
+	
+	if $Body/pinpoint/chest.get_child_count() != 0:
+		$Body/pinpoint/player_soul_chest.visible = false
+	else:
+		$Body/pinpoint/player_soul_chest.visible = true
+	
+	if legs.get_child_count() != 0:
+		$Body/player_soul_leg.visible = false
+	else:
+		$Body/player_soul_leg.visible = true
