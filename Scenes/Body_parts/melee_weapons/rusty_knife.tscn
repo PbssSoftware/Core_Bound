@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmbcn26w80fj4"]
+
+[ext_resource type="Script" path="res://Scripts/weapons_script/rusty_knife.gd" id="1_eehcg"]
+
+[node name="rusty_knife" type="Node2D"]
+script = ExtResource("1_eehcg")
+
+[node name="weapon_sprite" type="Sprite2D" parent="."]
+
+[node name="hand_sprite" type="Sprite2D" parent="weapon_sprite"]
+
+[node name="skill_spwn_loc" type="Marker2D" parent="."]
+unique_name_in_owner = true

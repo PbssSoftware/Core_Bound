@@ -61,6 +61,33 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.802752, 0.192661)
 
+[sub_resource type="Animation" id="Animation_nqy08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/pinpoint/player_soul_head:material:shader_parameter/palette:gradient:colors")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedColorArray(0, 0, 0, 0, 1, 0.168627, 0.145098, 1, 0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("core_texture:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -6)]
+}
+
 [sub_resource type="Animation" id="Animation_pivsq"]
 resource_name = "mage_core"
 length = 0.7
@@ -376,33 +403,6 @@ tracks/8/keys = {
 "values": [PackedColorArray(0, 0, 0, 0, 1, 0.168627, 0.145098, 1, 0, 0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_nqy08"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body/pinpoint/player_soul_head:material:shader_parameter/palette:gradient:colors")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [PackedColorArray(0, 0, 0, 0, 1, 0.168627, 0.145098, 1, 0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("core_texture:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -6)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d2s24"]
 _data = {
 "RESET": SubResource("Animation_nqy08"),
@@ -438,7 +438,7 @@ shader_parameter/palette = SubResource("GradientTexture2D_eam18")
 
 [sub_resource type="Gradient" id="Gradient_vjk5g"]
 offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.286275, 0.65098, 0, 1, 0, 0, 0, 0)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.168627, 0.145098, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_6bvgm"]
 gradient = SubResource("Gradient_vjk5g")
@@ -474,7 +474,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("player_soul_leg:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -551,7 +551,7 @@ _data = {
 
 [sub_resource type="Gradient" id="Gradient_015q6"]
 offsets = PackedFloat32Array(0, 0.507246, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.286275, 0.65098, 0, 1, 0, 0, 0, 0)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.168627, 0.145098, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lem5o"]
 gradient = SubResource("Gradient_015q6")
@@ -1461,7 +1461,6 @@ glow_levels/5 = 0.0
 glow_normalized = true
 glow_strength = 1.5
 glow_blend_mode = 1
-glow_hdr_threshold = 0.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 light_mask = 2
@@ -1502,11 +1501,11 @@ libraries = {
 }
 
 [node name="core_texture" type="Sprite2D" parent="."]
-self_modulate = Color(0.17, 2, 0.17, 1)
+self_modulate = Color(2, 0.3, 0.3, 1)
 material = SubResource("CanvasItemMaterial_57h6t")
 position = Vector2(0, -6)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_2i5of")
+texture = ExtResource("2_bv3sh")
 hframes = 4
 script = ExtResource("3_t15st")
 
@@ -1553,7 +1552,7 @@ libraries = {
 }
 
 [node name="player_soul_leg" type="Sprite2D" parent="Body"]
-z_index = -1
+z_index = -2
 material = SubResource("ShaderMaterial_1lyyb")
 scale = Vector2(3, 3)
 texture = ExtResource("10_oi034")

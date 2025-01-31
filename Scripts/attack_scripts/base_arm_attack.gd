@@ -1,7 +1,7 @@
 extends Node2D
 class_name base_arm_attack
 
-
+var initial_angle : Vector2 = Vector2.ZERO
 var angle : Vector2 = Vector2.ZERO
 var target #definido quando entra na range de colisao de outro script
 var direction : Vector2 = Vector2.RIGHT
@@ -29,11 +29,21 @@ func _physics_process(_delta):
 ##	flip_sprite()
 ##	position += skill_speed * angle
 
+#func mage_projectile(_delta):
+#	if target != null:
+#		angle = global_position.direction_to(target)
+#		self.look_at(target)
+#		position += angle * skill_speed * _delta
+
 func mage_projectile(_delta):
-	if target != null:
-		angle = global_position.direction_to(target)
+	if target != null and initial_angle == Vector2.ZERO: 
+		# Store the initial direction when the projectile is fired
+		initial_angle = global_position.direction_to(target)
+	
+	if initial_angle != Vector2.ZERO:
 		self.look_at(target)
-		position += angle * skill_speed * _delta
+		position += initial_angle * skill_speed * _delta
+
 
 func regular_arms(_delta):
 	if target != null:
@@ -44,11 +54,11 @@ func regular_arms(_delta):
 func _on_vanish_timer_timeout():
 	queue_free()
 
-func flip_sprite():
-	if get_parent().position.x > 0:
-		$attack_texture.flip_h = false
-	if get_parent().position.x < 0:
-		$attack_texture.flip_h = true
+#func flip_sprite():
+#	if get_parent().position.x > 0:
+#		$attack_texture.flip_h = false
+#	if get_parent().position.x < 0:
+#		$attack_texture.flip_h = true
 
 
 

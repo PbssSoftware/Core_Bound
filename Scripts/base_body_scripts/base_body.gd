@@ -142,7 +142,7 @@ func spawn_attack():
 	else:
 		new_attack.skill_damage = skill_dmg
 #	new_attack.skill_knockback = skill_knockback
-	var random_enemy = get_closest_enemy()#get_random_enemy()
+	var random_enemy = get_closest_enemy()#get_random_enemy() (antigo)
 	new_attack.target = random_enemy
 	new_attack.direction = self.global_position.direction_to(new_attack.target).normalized()#testando, essa porra esta causando crash de alguma forma com o emerald staff, refazer essa bosta
 	is_attacking = true

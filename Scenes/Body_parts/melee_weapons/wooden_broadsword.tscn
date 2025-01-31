@@ -14,7 +14,7 @@ texture = ExtResource("2_cok0y")
 offset = Vector2(0, -16)
 
 [node name="hand_sprite" type="Sprite2D" parent="weapon_sprite"]
-position = Vector2(-1, 0)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_im7pj")
 
 [node name="skill_spwn_loc" type="Marker2D" parent="."]
