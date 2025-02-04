@@ -11,8 +11,6 @@ func _can_drop_data(at_position, data):
 	# Ensure the data is valid and not already filled
 	if not (data is TextureRect and filled == false):
 		return false
-	
-	
 	# Check if the slot type matches or if it's a one-handed weapon for L_ARM or R_ARM
 	if data.slot_type == slot_type:
 		return true
@@ -31,7 +29,7 @@ func _can_drop_data(at_position, data):
 func _drop_data(at_position, data):
 	if is_locked:
 		return
-	if data.slot_type == 7 and check_one_handed():
+	if data.is_two_handed and check_one_handed(): #data.slot_type == 7
 		return
 	if data.slot_type == 4 and check_two_handed():
 		return  

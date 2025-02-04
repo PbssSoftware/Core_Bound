@@ -2,7 +2,7 @@ extends ranged_weapon
 class_name emerald_staff
 
 @onready var attack_anim = $attack_anim
-@onready var walk_anim = $weapon_sprite/walk_anim
+@onready var walk_anim = $pivot/weapon_sprite/walk_anim
 
 
 func _process(delta):
@@ -17,16 +17,23 @@ func direction_handle():
 	else:
 		walk_anim.play("run")
 	if velocity.x > 0:
-		$weapon_sprite.scale.x = 3
-#		$weapon_sprite.flip_h = false
-#		$weapon_sprite/hand_sprite.flip_h = false
-#		$weapon_sprite/glow_detail.flip_h = false
+		$pivot/weapon_sprite.flip_h = false
+		$pivot/weapon_sprite/glow_detail.flip_h = false
+		$pivot/weapon_sprite/glow_detail.position.x = 5.5
+		$pivot/weapon_sprite/GPUParticles2D.position.x = 5.3
+		$pivot/weapon_sprite/skill_spwn_loc.position.x = 5.3
+		
+	
 		
 	if velocity.x < 0:
-		$weapon_sprite.scale.x = -3
-#		$weapon_sprite.flip_h = true
-#		$weapon_sprite/hand_sprite.flip_h = true
-#		$weapon_sprite/glow_detail.flip_h = true
+		$pivot/weapon_sprite.flip_h = true
+		$pivot/weapon_sprite/glow_detail.flip_h = true
+		$pivot/weapon_sprite/glow_detail.position.x = -5.5
+		$pivot/weapon_sprite/GPUParticles2D.position.x = -5.3
+		$pivot/weapon_sprite/skill_spwn_loc.position.x = -5.3
+		
+	
+
 
 
 

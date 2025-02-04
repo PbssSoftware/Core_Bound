@@ -20,15 +20,15 @@ func get_core_scaling_type(ID = "0"):
 
 var content = {
 	"0": {
-		"item_name" : "regular_arms",
-		"scene" : "res://Scenes/Body_parts/Arms/regular_arms.tscn",
+		"item_name" : "rusty_knife",
+		"scene" : "res://Scenes/Body_parts/melee_weapons/rusty_knife.tscn",
 		"slot_type" : 4,
-		"texture" : "/parts_icons/regular_arms.png",
-		"displayname" : "Regular Arms",
-		"details" : "A pair of fists that can punch",
+		"texture" : "/parts_icons/rusty_knife.png",
+		"displayname" : "Rusty Knife",
+		"details" : "A almost useless rusty knife",
 		"part_level" : 1,
 		"drop_loc" : "forest",
-		"core_scaling" : "warrior_core",
+		"core_scaling" : "",
 		"is_two_handed" : false
 	},
 	"1": {

@@ -15,8 +15,8 @@ gradient = SubResource("Gradient_71l0m")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jns54"]
 size = Vector2(64, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3hpq"]
-size = Vector2(142, 45)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gprya"]
+radius = 90.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4wtj4"]
 light_mode = 1
@@ -57,8 +57,7 @@ shape = SubResource("RectangleShape2D_jns54")
 [node name="blacksmith_area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blacksmith_area"]
-position = Vector2(0, 65)
-shape = SubResource("RectangleShape2D_c3hpq")
+shape = SubResource("CircleShape2D_gprya")
 
 [node name="window_pos" type="Marker2D" parent="."]
 position = Vector2(0, -151)

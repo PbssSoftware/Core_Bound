@@ -1,13 +1,202 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmbcn26w80fj4"]
+[gd_scene load_steps=15 format=3 uid="uid://cmbcn26w80fj4"]
 
 [ext_resource type="Script" path="res://Scripts/weapons_script/rusty_knife.gd" id="1_eehcg"]
+[ext_resource type="Script" path="res://Resources/Scripts/Body_part_upgrade.gd" id="2_spggr"]
+[ext_resource type="Texture2D" uid="uid://bkih3tsf85apm" path="res://Sprites/Body_parts_anims/weapons/melee_weapons/rusty_knife.png" id="2_y74x4"]
+[ext_resource type="Texture2D" uid="uid://57hukcpmwi1s" path="res://Sprites/Body_parts_anims/hands/l_hand.png" id="3_irwy2"]
+
+[sub_resource type="Resource" id="Resource_m5rle"]
+script = ExtResource("2_spggr")
+skill_speed = 100
+skill_cooldown = 1.0
+skill_dmg = 999.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 1
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.5
+speed_modifier = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcyty"]
+size = Vector2(6.33333, 24.6667)
+
+[sub_resource type="Animation" id="Animation_m3dow"]
+resource_name = "idle"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5),
+"transitions": PackedFloat32Array(-0.5, -0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q25yg"]
+resource_name = "run"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(-0.5, -0.5, -0.5, -0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, -5), Vector2(0, 0), Vector2(-5, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yp4ek"]
+_data = {
+"idle": SubResource("Animation_m3dow"),
+"run": SubResource("Animation_q25yg")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sor7d"]
+radius = 299.167
+
+[sub_resource type="Animation" id="Animation_4jut0"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivot/weapon_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.9),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-12, 0), Vector2(120, 0), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"knife_stab"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("pivot/weapon_sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 1.5708, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_f56va"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivot/weapon_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("pivot/weapon_sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mwmbq"]
+_data = {
+"RESET": SubResource("Animation_f56va"),
+"attack": SubResource("Animation_4jut0")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_orkv6"]
+radius = 173.0
 
 [node name="rusty_knife" type="Node2D"]
 script = ExtResource("1_eehcg")
+level_upgrader = Array[ExtResource("2_spggr")]([SubResource("Resource_m5rle")])
+part_name = "Rusty Knife"
 
-[node name="weapon_sprite" type="Sprite2D" parent="."]
+[node name="pivot" type="Marker2D" parent="."]
 
-[node name="hand_sprite" type="Sprite2D" parent="weapon_sprite"]
+[node name="weapon_sprite" type="Sprite2D" parent="pivot"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_y74x4")
+offset = Vector2(0, -6)
+
+[node name="hand_sprite" type="Sprite2D" parent="pivot/weapon_sprite"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_irwy2")
+
+[node name="hitbox_area" type="Area2D" parent="pivot/weapon_sprite"]
+visible = false
+position = Vector2(0, -6.33333)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/weapon_sprite/hitbox_area"]
+position = Vector2(-0.166667, -2.33333)
+shape = SubResource("RectangleShape2D_jcyty")
+debug_color = Color(0.984314, 0.0431373, 0.298039, 0.419608)
+
+[node name="walk_anim" type="AnimationPlayer" parent="pivot/weapon_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_yp4ek")
+}
 
 [node name="skill_spwn_loc" type="Marker2D" parent="."]
 unique_name_in_owner = true
+
+[node name="detection_area" type="Area2D" parent="."]
+visible = false
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_sor7d")
+
+[node name="attack_anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mwmbq")
+}
+
+[node name="attack_cd" type="Timer" parent="."]
+
+[node name="range_area" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -19)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="range_area"]
+shape = SubResource("CircleShape2D_orkv6")
+
+[connection signal="body_entered" from="pivot/weapon_sprite/hitbox_area" to="." method="_on_hitbox_area_body_entered"]
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="attack_cd" to="." method="_on_attack_cd_timeout"]
+[connection signal="body_entered" from="range_area" to="." method="_on_range_area_body_entered"]

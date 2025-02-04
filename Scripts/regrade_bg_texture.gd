@@ -1,7 +1,7 @@
 extends TextureRect
 
 @onready var blacksmith = get_tree().get_first_node_in_group("blacksmith")
-@onready var place = blacksmith.get_node("window_pos")
+#@onready var place = blacksmith.get_node("window_pos")
 @onready var upgrade_slot = $slot
 @onready var texture_rect = upgrade_slot.get_node("TextureRect")
 @onready var anvil_effect = $AnimatedSprite2D

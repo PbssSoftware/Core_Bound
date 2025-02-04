@@ -11,7 +11,7 @@
 script = ExtResource("2_eoavr")
 skill_speed = 200
 skill_cooldown = 1.0
-skill_dmg = 2.0
+skill_dmg = 200.0
 skill_hp = 0
 skill_knockback = 0.0
 skill_level = 1
@@ -183,7 +183,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("weapon_sprite:position")
+tracks/0/path = NodePath("pivot/weapon_sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -195,7 +195,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("weapon_sprite/glow_detail:visible")
+tracks/1/path = NodePath("pivot/weapon_sprite/glow_detail:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -207,7 +207,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("weapon_sprite/GPUParticles2D:emitting")
+tracks/2/path = NodePath("pivot/weapon_sprite/GPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -219,7 +219,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("weapon_sprite/glow_detail:self_modulate")
+tracks/3/path = NodePath("pivot/weapon_sprite/glow_detail:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -234,7 +234,7 @@ resource_name = "attack"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("weapon_sprite:position")
+tracks/0/path = NodePath("pivot/weapon_sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -246,7 +246,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("weapon_sprite/glow_detail:visible")
+tracks/1/path = NodePath("pivot/weapon_sprite/glow_detail:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -258,7 +258,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("weapon_sprite/GPUParticles2D:emitting")
+tracks/2/path = NodePath("pivot/weapon_sprite/GPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -270,7 +270,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("weapon_sprite/glow_detail:self_modulate")
+tracks/3/path = NodePath("pivot/weapon_sprite/glow_detail:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -306,22 +306,23 @@ level_upgrader = Array[ExtResource("2_eoavr")]([SubResource("Resource_fh4jw"), S
 core_scaling_type = "mage_core"
 attack_scene = ExtResource("2_cbh1a")
 
-[node name="weapon_sprite" type="Sprite2D" parent="."]
+[node name="pivot" type="Marker2D" parent="."]
+
+[node name="weapon_sprite" type="Sprite2D" parent="pivot"]
 z_index = -3
-rotation = -0.436332
 scale = Vector2(3, 3)
 texture = ExtResource("2_he6i1")
 
-[node name="hand_sprite" type="Sprite2D" parent="weapon_sprite"]
+[node name="hand_sprite" type="Sprite2D" parent="pivot/weapon_sprite"]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_ldigu")
 
-[node name="glow_detail" type="Sprite2D" parent="weapon_sprite"]
+[node name="glow_detail" type="Sprite2D" parent="pivot/weapon_sprite"]
 visible = false
-position = Vector2(5.502, -16.482)
+position = Vector2(5.5, -16.5)
 texture = ExtResource("4_7fy01")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="weapon_sprite"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="pivot/weapon_sprite"]
 material = SubResource("CanvasItemMaterial_j5y2l")
 position = Vector2(5.33333, -16.3333)
 rotation = 0.459022
@@ -330,12 +331,12 @@ amount = 30
 process_material = SubResource("ParticleProcessMaterial_xtk2b")
 local_coords = true
 
-[node name="skill_spwn_loc" type="Marker2D" parent="weapon_sprite"]
+[node name="skill_spwn_loc" type="Marker2D" parent="pivot/weapon_sprite"]
 unique_name_in_owner = true
 position = Vector2(5.33333, -16.3333)
 scale = Vector2(0.333333, 0.333333)
 
-[node name="walk_anim" type="AnimationPlayer" parent="weapon_sprite"]
+[node name="walk_anim" type="AnimationPlayer" parent="pivot/weapon_sprite"]
 libraries = {
 "": SubResource("AnimationLibrary_vje3n")
 }

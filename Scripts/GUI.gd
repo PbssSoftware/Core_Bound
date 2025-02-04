@@ -37,7 +37,7 @@ func manage_hp_bar():
 func manage_boss_bar():
 	boss_bar.value = Global.mobs_killed
 	if Global.waves_started and !anim_finished:
-		animationPlayer.play("boss_bar")
+		$boss_bar_gui_anim.play("boss_bar")
 		anim_finished = true
 
 #func _physics_process(delta):
