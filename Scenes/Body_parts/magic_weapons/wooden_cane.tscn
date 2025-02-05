@@ -1,0 +1,212 @@
+[gd_scene load_steps=17 format=3 uid="uid://dcy3jjclscoje"]
+
+[ext_resource type="Script" path="res://Scripts/weapons_script/wooden_cane.gd" id="1_cbld6"]
+[ext_resource type="Script" path="res://Resources/Scripts/Body_part_upgrade.gd" id="2_dkc08"]
+[ext_resource type="Texture2D" uid="uid://bg8gmxuxwseoi" path="res://Sprites/Body_parts_anims/weapons/magic_weapons/wooden_cane.png" id="2_vxi63"]
+[ext_resource type="Texture2D" uid="uid://57hukcpmwi1s" path="res://Sprites/Body_parts_anims/hands/l_hand.png" id="3_um5e3"]
+
+[sub_resource type="Resource" id="Resource_lasfg"]
+script = ExtResource("2_dkc08")
+skill_speed = 100
+skill_cooldown = 2.0
+skill_dmg = 100.0
+skill_hp = 0
+skill_knockback = 0.0
+skill_level = 1
+hp_modifier = 0
+defense_modifier = 0
+skill_crit_chance = 0.0
+speed_modifier = 0
+
+[sub_resource type="Animation" id="Animation_lwavv"]
+resource_name = "idle"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5),
+"transitions": PackedFloat32Array(-0.5, -0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tcy0m"]
+resource_name = "run"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(-0.5, -0.5, -0.5, -0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, -5), Vector2(0, 0), Vector2(-5, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jdyyq"]
+_data = {
+"idle": SubResource("Animation_lwavv"),
+"run": SubResource("Animation_tcy0m")
+}
+
+[sub_resource type="Gradient" id="Gradient_3j0m6"]
+colors = PackedColorArray(0.21, 0.54, 2, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7yfba"]
+gradient = SubResource("Gradient_3j0m6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_60x2e"]
+emission_shape = 1
+emission_sphere_radius = 5.0
+particle_flag_disable_z = true
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_7yfba")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dbnxo"]
+radius = 1000.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_770s8"]
+radius = 350.0
+
+[sub_resource type="Animation" id="Animation_jfelt"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivot/weapon_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(0.5, -2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(39, -29), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("pivot/weapon_sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -0.418879, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("pivot/weapon_sprite/GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_44adm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivot/weapon_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("pivot/weapon_sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("pivot/weapon_sprite/GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k8s17"]
+_data = {
+"RESET": SubResource("Animation_44adm"),
+"attack": SubResource("Animation_jfelt")
+}
+
+[node name="wooden_cane" type="Node2D"]
+script = ExtResource("1_cbld6")
+level_upgrader = Array[ExtResource("2_dkc08")]([SubResource("Resource_lasfg")])
+
+[node name="pivot" type="Marker2D" parent="."]
+
+[node name="weapon_sprite" type="Sprite2D" parent="pivot"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_vxi63")
+offset = Vector2(0, -6)
+
+[node name="hand_sprite" type="Sprite2D" parent="pivot/weapon_sprite"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_um5e3")
+
+[node name="walk_anim" type="AnimationPlayer" parent="pivot/weapon_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_jdyyq")
+}
+
+[node name="skill_spwn_loc" type="Marker2D" parent="pivot/weapon_sprite"]
+unique_name_in_owner = true
+position = Vector2(0, -24)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="pivot/weapon_sprite"]
+position = Vector2(0, -25)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_60x2e")
+
+[node name="atk_cooldown_timer" type="Timer" parent="."]
+
+[node name="detection_area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_dbnxo")
+
+[node name="range_area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="range_area"]
+shape = SubResource("CircleShape2D_770s8")
+debug_color = Color(0.968627, 0, 0.47451, 0.419608)
+
+[node name="attack_anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k8s17")
+}

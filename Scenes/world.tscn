@@ -134,6 +134,7 @@ part_level = 1
 
 [node name="DroppedItem5" parent="." instance=ExtResource("4_u1ep2")]
 position = Vector2(1300, 1217)
+ID = "19"
 part_level = 1
 
 [node name="DroppedItem7" parent="." instance=ExtResource("4_u1ep2")]

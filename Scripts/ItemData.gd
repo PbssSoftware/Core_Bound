@@ -28,7 +28,7 @@ var content = {
 		"details" : "A almost useless rusty knife",
 		"part_level" : 1,
 		"drop_loc" : "forest",
-		"core_scaling" : "",
+		"core_scaling" : "warrior_core",
 		"is_two_handed" : false
 	},
 	"1": {
@@ -247,4 +247,17 @@ var content = {
 		"core_scaling" : "ranger_core",
 		"is_two_handed" : false
 	},
+	"19": {
+		"item_name" : "wooden_cane",
+		"scene" : "res://Scenes/Body_parts/magic_weapons/wooden_cane.tscn",
+		"slot_type" : 7,
+		"texture" : "/parts_icons/wooden_cane.png",
+		"displayname" : "Wooden Cane",
+		"details" : "A walking wooden cane",
+		"part_level" : 1,
+		"drop_loc" : "forest",
+		"core_scaling" : "mage_core",
+		"is_two_handed" : false
+	},
 }
+
